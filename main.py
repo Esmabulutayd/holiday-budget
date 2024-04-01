@@ -1,3 +1,6 @@
+# define functions before implementing top-level code
+
+# plane_cost function calculates the cost of the flight based on the destination city
 def plane_cost(city_flight):
 
     if city_flight == "Istanbul":
@@ -9,6 +12,7 @@ def plane_cost(city_flight):
     else:
         return 0
 
+# hotel_cost function calculates the cost of the hotel stay based on the number of nights and destination city.
 def hotel_cost(num_nights):
 
     if city_flight == "Istanbul":
@@ -20,49 +24,69 @@ def hotel_cost(num_nights):
     else:
         return 0
 
+# car_rental function calculates the cost of car rental based on the number of days
 def car_rental(rental_days):
 
     return rental_days * 75  # Program assumes a daily rental cost of £75 for the car
 
+# holiday_cost function calculates the total holiday cost including hotel, flight, and car rental
 def holiday_cost(hotel_total, plane_total, car_total):
 
     return hotel_total + plane_total + car_total
 
-
+# Infinite loop to continuously calculate holiday budgets until user chooses to stop
 while True:
-
+    # Welcome message
     print("Welcome to holiday budget calculator!\n")
 
+    # List of cities where user can travel
     cities = ["Istanbul", "London", "Amsterdam"]
 
+    # Prompting user to input their desired travel city
     city_flight = input("Please input the city name you'd like to travel (options: Istanbul, London, Amsterdam): \n").capitalize()
 
+    # Validating user input for city selection
     while city_flight not in cities:
         print("Please choose a city from the list.")
         city_flight = input("Please input the city name you'd like to travel (options: Istanbul, London, Amsterdam): \n").capitalize()
 
+    # Prompting user to input number of nights for stay
     num_nights = input("Please enter number of the nights you would like to stay: \n")
 
+    # Validating user input for number of nights
     while not num_nights.isnumeric():
         print("Please enter a number.")
         num_nights = input("Please enter number of the nights you would like to stay: \n")
 
+    # Converting number of nights to integer
     num_nights = int(num_nights)
 
+    # Prompting user to input number of days for car rental
     rental_days = input("Please enter number of the days you would like to rent a car: \n")
 
+    # Validating user input for number of rental days
     while not rental_days.isnumeric():
         print("Please enter a number.")
         rental_days = input("Please enter number of the days you would like to rent a car: \n")
 
+    # Converting number of rental days to integer
     rental_days = int(rental_days)
     
+    # Calculating total hotel cost
     hotel_total = hotel_cost(num_nights)
+    
+    # Calculating total flight cost based on selected city
     flight_total = plane_cost(city_flight)
+    
+    # Calculating total car rental cost
     car_total = car_rental(rental_days)
 
+    # Calculating and displaying the total holiday cost
     print(f"Your total holiday cost is: £ {holiday_cost(hotel_total, flight_total, car_total)}")
 
+    # Asking user if they want to calculate another holiday budget
     choice = input("Would you like to calculate another holiday budget? (yes/no): ").lower()
+    
+    # Exiting loop if user does not want to calculate another budget
     if choice != "yes":
         break
